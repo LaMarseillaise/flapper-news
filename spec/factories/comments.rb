@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :comment do
-    body "MyString"
-upvotes 1
-post nil
+    body "That sucks!"
+    upvotes 0
+    association :post
   end
-
 end

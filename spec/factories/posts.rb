@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :post do
-    title "MyString"
-link "MyString"
-upvotes 1
+    title "Oh my wow, it's google"
+    link "www.google.com"
+    upvotes 0
   end
-
 end
