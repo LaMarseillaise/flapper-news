@@ -1,3 +1,3 @@
 //= require angular
-//= require angular-ui-router.min.js
+//= require angular-ui-router
 //= require_tree .

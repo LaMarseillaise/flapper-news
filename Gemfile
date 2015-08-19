@@ -4,13 +4,11 @@ gem 'rails', '4.2.3'
 gem 'pg'
 gem 'thin'
 
-gem 'angularjs-rails'
 gem 'angular_rails_csrf'
-
 gem 'sass-rails', '~> 5.0'
-gem 'twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.0'
+
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
