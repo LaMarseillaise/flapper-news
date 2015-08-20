@@ -1,4 +1,4 @@
-var flapperNews = angular.module('flapperNews', ['ui.router']);
+var flapperNews = angular.module('flapperNews', ['ui.router', 'restangular']);
 
 flapperNews.config(['$stateProvider', '$urlRouterProvider',
 function($stateProvider, $urlRouterProvider) {
@@ -7,7 +7,12 @@ function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('home', {
     url: '/home',
     templateUrl: '/templates/home.html',
-    controller: 'MainCtrl'
+    controller: 'MainCtrl',
+    resolve: {
+      posts: ['Post', function(Post){
+        return Post.getList();
+      }]
+    },
   })
   .state('posts', {
     url: '/posts/{id}',
@@ -16,3 +21,10 @@ function($stateProvider, $urlRouterProvider) {
   });
 
 }]);
+
+// flapperNews.config(['RestangularProvider', function(RestangularProvider) {
+//
+//   RestangularProvider.setBaseUrl('http://localhost:3000');
+//   RestangularProvider.setRequestSuffix('.json')
+//
+// }]);

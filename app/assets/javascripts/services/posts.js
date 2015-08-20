@@ -1,6 +1,4 @@
-flapperNews.factory('Post', [function(){
-  var o = {
-    posts: []
-  };
-  return o;
-}])
+flapperNews.factory('Post', ['Restangular', function(Restangular){
+  var service = Restangular.service("posts");
+  return service;
+}]);

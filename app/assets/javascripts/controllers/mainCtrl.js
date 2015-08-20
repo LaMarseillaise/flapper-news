@@ -1,23 +1,20 @@
-flapperNews.controller('MainCtrl', ['$scope', 'Post', function($scope, Post){
+flapperNews.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
 
-  $scope.posts = Post.posts;
+  $scope.posts = posts;
+
+  $scope.newPost = {};
 
   $scope.createPost = function(){
-    $scope.posts.push({
-      title: $scope.title,
-      link: $scope.link,
-      upvotes: 0,
-      comments: [
-        {author: 'Joe', body: 'Cool post!', upvotes: 0},
-        {author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}
-      ]
+    $scope.posts.post($scope.newPost).then(function(data){
+      $scope.posts.push(data);
+      $scope.newPost = {};
     });
-    $scope.title = "";
-    $scope.link = "";
   };
 
   $scope.upvote = function(post){
-    post.upvotes += 1;
+    post.customPUT(post, 'upvote').then(function(data){
+      post.upvotes += 1;
+    });
   };
 
 }]);
