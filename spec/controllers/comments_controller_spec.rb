@@ -4,6 +4,10 @@ RSpec.describe CommentsController, type: :controller do
 
   let(:comment)  { FactoryGirl.create :comment }
   let(:hot_post) { FactoryGirl.create :post }
+  let(:user) { FactoryGirl.create(:user) }
+
+  before(:each) { sign_in(:user, user) }
+
 
   describe 'POST #create' do
     it 'creates a new comment' do

@@ -6,12 +6,13 @@
     <span ng-hide="post.link">
       {{post.title}}
     </span>
+    posted by <a ng-href="#/users/{{post.user.username}}">{{post.user.username}}</a>
   </h3>
 </div>
 
 <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
   <span ng-click="upvote(comment)">+</span>
-  {{comment.upvotes}} - by {{comment.author}}
+  {{comment.upvotes}} - by {{comment.user.username}}
   <span>
     {{comment.body}}
   </span>

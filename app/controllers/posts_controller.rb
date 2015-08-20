@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_filter :authenticate_user!, only: [:create, :upvote]
+
   def index
     render json: Post.all
   end
@@ -9,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    render json: Post.create(post_params)
+    render json: current_user.posts.create(post_params)
   end
 
   def upvote

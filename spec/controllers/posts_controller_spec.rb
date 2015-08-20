@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
 
   let(:hot_post) { FactoryGirl.create(:post) }
+  let(:user) { FactoryGirl.create(:user) }
+
+  before(:each) { sign_in(:user, user) }
+
 
   describe 'GET #index' do
     it 'renders a list of posts in json' do
@@ -25,12 +29,12 @@ RSpec.describe PostsController, type: :controller do
     it 'creates a new post' do
       expect{
         post :create, post: FactoryGirl.attributes_for(:post)
-      }.to change{Post.count}.by(1)
+      }.to change{user.posts.count}.by(1)
     end
 
     it 'renders the new post as json' do
       post :create, post: FactoryGirl.attributes_for(:post)
-      expect(response.body).to eq(Post.last.to_json)
+      expect(response.body).to eq(user.posts.last.to_json)
     end
   end
 
