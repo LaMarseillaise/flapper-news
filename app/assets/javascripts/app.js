@@ -17,14 +17,16 @@ function($stateProvider, $urlRouterProvider) {
   .state('posts', {
     url: '/posts/{id}',
     templateUrl: '/templates/posts.html',
-    controller: 'PostsCtrl'
+    controller: 'PostsCtrl',
+    resolve: {
+      post: ['$stateParams', 'Post', function($stateParams, Post){
+        return Post.one($stateParams.id).get();
+      }]
+    },
   });
 
 }]);
 
-// flapperNews.config(['RestangularProvider', function(RestangularProvider) {
-//
-//   RestangularProvider.setBaseUrl('http://localhost:3000');
-//   RestangularProvider.setRequestSuffix('.json')
-//
-// }]);
+flapperNews.run(['$rootScope', function($rootScope){
+  $rootScope.$on("$stateChangeError", console.log.bind(console));
+}]);

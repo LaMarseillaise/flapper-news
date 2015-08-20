@@ -1,16 +1,21 @@
-flapperNews.controller('PostsCtrl', ['$scope', '$stateParams', 'Post',
-function($scope, $stateParams, Post){
+flapperNews.controller('PostsCtrl', ['$scope', 'post',
+function($scope, post){
 
-  $scope.post = Post.posts[$stateParams.id];
+  $scope.post = post;
+
+  $scope.newComment = {};
 
   $scope.addComment = function(){
-    if($scope.body === '') { return; }
-    $scope.post.comments.push({
-      body: $scope.body,
-      author: 'user',
-      upvotes: 0
+    $scope.post.post('comments', $scope.newComment).then(function(data){
+      $scope.post.comments.push(data);
+      $scope.newComment = {};
     });
-    $scope.body = '';
+  };
+
+  $scope.upvote = function(comment){
+    $scope.post.one('comments', comment.id).customPUT(comment, 'upvote').then(function(data){
+      comment.upvotes += 1;
+    });
   };
 
 }]);

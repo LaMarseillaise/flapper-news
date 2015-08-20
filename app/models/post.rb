@@ -4,4 +4,8 @@ class Post < ActiveRecord::Base
 
   validates :title, :link, presence: true
 
+  def as_json(options = {})
+    super(options.merge(include: :comments))
+  end
+
 end
